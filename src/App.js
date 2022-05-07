@@ -24,63 +24,32 @@ class App extends React.Component {
   }
 
   add = (item) => {
-    // const thisItems = this.state.items;
-    // item.id = "ID-" + thisItems.length;
-    // thisItems.push(item);
-    // this.setState({ items: thisItems });
-    // call("/book", "POST", item).then((response) =>
-    //   this.setState({ items: response.data }, () => {
-    //     console.log(this.state.items);
-    //   })
-    // );
-    call("/book", "POST", item);
-    call("/book/table", "GET", null).then((response) =>
-      this.setState({ items: response.data })
-    );
+    call("/book", "POST", item).then((response) => {
+      this.setState({ items: response.data });
+    });
   };
 
   search = (item) => {
-    // const thisItems = this.state.items;
-    // const newItem = thisItems.find((e) => e.title === item.title);
-    // this.setState({ searchItem: newItem });
     call("/book/search", "POST", item).then((response) =>
       this.setState({ searchItem: response.data[0] })
     );
   };
 
   searchForUpdate = (item) => {
-    // const thisItems = this.state.items;
-    // const newItem = thisItems.find((e) => e.title === item.title);
-    // this.setState({ updateItem: newItem });
     call("/book/search", "POST", item).then((response) =>
       this.setState({ updateItem: response.data[0] })
     );
   };
 
   update = (item) => {
-    //const thisItems = this.state.items;
-    // update 미구현
-    // const newItems = thisItems.filter((e) => e.id !== item.id);
-    // newItems.push(item);
-    // console.log(newItems);
-    // this.setState({ items: newItems });
     call("/book", "PUT", item).then((response) =>
-      this.setState({ items: response.data }, () => {
-        console.log(this.state.items);
-      })
+      this.setState({ items: response.data })
     );
   };
 
   delete = (item) => {
-    // const thisItems = this.state.items;
-    // const newItems = thisItems.filter((e) => e.title !== item.title);
-    // this.setState({ items: newItems }, () => {
-    //   console.log(this.state.items);
-    // });
     call("/book", "DELETE", item).then((response) =>
-      this.setState({ items: response.data }, () => {
-        console.log(this.state.items);
-      })
+      this.setState({ items: response.data })
     );
   };
 
